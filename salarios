@@ -6,29 +6,51 @@ using System.Threading.Tasks;
 
 namespace Salarios
 {
-    class funcionarios
+    class Program
     {
-       
-        public string Nome { get; set; } //declarando
-        public double Salario { get; set; }
-        public int Id { get; set; }
+        static void Main(string[] args)
+        {
+           
+            funcionarios[] vect = new funcionarios[100];
+           Console.WriteLine("Digite o numero de Funcionarios a ser registrado: ");
+            int x = int.Parse(Console.ReadLine());
 
-     
-        public funcionarios(string nome, double salario, int id)   //declarando o construtor
-        {
-            Nome = nome;
-            Salario = salario;
-            Id = id;
-        }
-       
-        public override string ToString()
-        {
-            return Id + " , " + Nome + " , " + Salario;
-        }
+            for (int i = 1; i <= x; i++)
+            {
+             
+                Console.WriteLine($"Funcionario#{i}");
+                Console.WriteLine("Id:");
+                int id = int.Parse(Console.ReadLine());
+                Console.WriteLine("Nome:");
+                string nome = Console.ReadLine();
+                Console.WriteLine("Salario:");
+                double salario = double.Parse(Console.ReadLine());
+
+                vect[id] = new funcionarios(nome, salario, id);
+            }
+            Console.WriteLine("Id do funcionário receberá aumento: ");
+            int id2 = int.Parse(Console.ReadLine());
+
+            if (vect[id2] != null)
+            {
+                Console.WriteLine("Porcentagem de aumento de salario: ");
+                double porcentagem = double.Parse(Console.ReadLine());
+                porcentagem = porcentagem + 100;
+                vect[id2].AumentarSalario(porcentagem);
+            }
+            else
+            {
+                Console.WriteLine("Este funcionario não existe!");
+            }
+            Console.WriteLine("Lista atualizada dos funcionarios da Bravo: ");
+            for (int i = 0; i < x + 1; i++)
+            {
+                if (vect[i] != null)
+                {
+                    Console.WriteLine(vect[i]);
+                }
+            }
         
-        public void AumentoDeSalario(double porcentagem)
-        {
-            Salario = Salario * porcentagem / 100;
         }
     }
 }
